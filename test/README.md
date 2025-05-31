@@ -1,6 +1,6 @@
 # Test Suite for useWritableComputed
 
-This test suite comprehensively tests the `useWritableComputed` hook with 22 test cases covering:
+This test suite comprehensively tests the `useWritableComputed` hook with 23 test cases covering:
 
 ## Test Categories
 
@@ -41,6 +41,7 @@ This test suite comprehensively tests the `useWritableComputed` hook with 22 tes
 
 - Referential equality of setter across renders
 - Consistent setter reference during dependency changes
+- setState referential stability across all render types
 
 ## Running Tests
 

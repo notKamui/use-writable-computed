@@ -369,5 +369,47 @@ describe('useWritableComputed', () => {
       // Should have only one unique setter
       expect(setters.size).toBe(1)
     })
+
+    test('should keep setState referentially stable across all types of renders', () => {
+      type SetterFunction = (value: number | ((prev: number) => number)) => void
+      const setters: SetterFunction[] = []
+      let renderCount = 0
+
+      const { result, rerender } = renderHook((): [number, SetterFunction] => {
+        renderCount++
+        const [value, setter] = useWritableComputed(renderCount, [])
+        setters.push(setter)
+        return [value, setter]
+      })
+
+      const originalSetter = result.current[1]
+
+      // Test multiple rerenders without any changes
+      rerender()
+      rerender()
+      rerender()
+
+      // Test rerender after state update
+      act(() => {
+        result.current[1](100)
+      })
+      rerender()
+
+      // Test rerender after multiple state updates
+      act(() => {
+        result.current[1]((prev: number) => prev + 1)
+        result.current[1]((prev: number) => prev + 1)
+      })
+      rerender()
+
+      // All setters should be the exact same reference
+      setters.forEach((setter: SetterFunction) => {
+        expect(setter).toBe(originalSetter)
+      })
+
+      // Verify we collected multiple setters for a thorough test
+      expect(setters.length).toBeGreaterThan(5)
+      expect(renderCount).toBeGreaterThan(5)
+    })
   })
 })
