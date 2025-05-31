@@ -1,6 +1,1 @@
-# ts-toolchain-config
-My Typescript toolchain configuration files
-
-- Biome
-- VSCode
-- .editorconfig
+# use-writable-computed
