@@ -9,9 +9,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/react": "^19.1.6",
+    "react": "^19.1.0"
   },
   "peerDependencies": {
+    "react": "> 16.8.0",
     "typescript": "^5"
   }
 }
