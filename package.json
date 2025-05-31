@@ -1,0 +1,16 @@
+{
+  "name": "use-writable-computed",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "biome check",
+    "lint:fix": "biome check --fix"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
