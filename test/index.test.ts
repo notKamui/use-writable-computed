@@ -354,7 +354,7 @@ describe('useWritableComputed', () => {
       const setters = new Set()
       let dep = 1
 
-      const { result, rerender } = renderHook(() => {
+      const { rerender } = renderHook(() => {
         const [value, setter] = useWritableComputed(0, [dep])
         setters.add(setter)
         return [value, setter]
@@ -403,9 +403,7 @@ describe('useWritableComputed', () => {
       rerender()
 
       // All setters should be the exact same reference
-      setters.forEach((setter: SetterFunction) => {
-        expect(setter).toBe(originalSetter)
-      })
+      setters.forEach((setter) => expect(setter).toBe(originalSetter))
 
       // Verify we collected multiple setters for a thorough test
       expect(setters.length).toBeGreaterThan(5)
