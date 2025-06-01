@@ -4,11 +4,11 @@ import { JSDOM } from 'jsdom'
 import { useWritableComputed } from '../index'
 
 const dom = new JSDOM()
-// biome-ignore lint/suspicious/noExplicitAny:
-globalThis.window = dom.window as any
-globalThis.document = dom.window.document
-globalThis.HTMLElement = dom.window.HTMLElement
-globalThis.Element = dom.window.Element
+const _window = dom.window as unknown as typeof globalThis.window
+globalThis.window = _window
+globalThis.document = _window.document
+globalThis.HTMLElement = _window.HTMLElement
+globalThis.Element = _window.Element
 
 describe('useWritableComputed', () => {
   beforeEach(() => {
@@ -96,7 +96,7 @@ describe('useWritableComputed', () => {
     })
 
     test('should detect dependency changes', () => {
-      const computeFn = mock((prev?: string) => `computed-${Math.random()}`)
+      const computeFn = mock(() => `computed-${Math.random()}`)
 
       const { result, rerender } = renderHook(
         ({ value }) => useWritableComputed(computeFn, [value]),
