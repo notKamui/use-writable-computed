@@ -1,6 +1,6 @@
 # Test Suite for useWritableComputed
 
-This test suite comprehensively tests the `useWritableComputed` hook with 23 test cases covering:
+This test suite comprehensively tests the `useWritableComputed` hook with test cases covering:
 
 ## Test Categories
 
@@ -58,7 +58,3 @@ bun test:watch
 - `@testing-library/react` - React component testing
 - `jsdom` - DOM environment for testing
 - `bun:test` - Native Bun test runner
-
-## Test Coverage
-
-All tests pass successfully, ensuring the hook works correctly across different scenarios and edge cases.
